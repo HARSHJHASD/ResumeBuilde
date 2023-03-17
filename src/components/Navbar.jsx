@@ -3,7 +3,7 @@ import React from 'react'
 function Navbar() {
   return (
     <>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
   {/* Container wrapper */}
   <div className="container-fluid">
     {/* Toggle button */}
@@ -26,7 +26,7 @@ function Navbar() {
       {/* Left links */}
       <ul className="navbar-nav mb-2 mb-lg-0">
         <li className="nav-item">
-          <h3>Resume Builder</h3>
+          <h3>Antino Resume</h3>
         </li>
       </ul>
       {/* Left links */}

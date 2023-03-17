@@ -4,7 +4,7 @@ function footer() {
   return (
     <>
       <footer
-        className="text-center text-white"
+        className="text-center text-white fixed-bottom"
         style={{ backgroundColor: "#f1f1f1" }}
       >
         <div
