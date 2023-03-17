@@ -26,9 +26,7 @@ function Navbar() {
       {/* Left links */}
       <ul className="navbar-nav mb-2 mb-lg-0">
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="#">
-            Home
-          </a>
+          <h3>Resume Builder</h3>
         </li>
       </ul>
       {/* Left links */}
