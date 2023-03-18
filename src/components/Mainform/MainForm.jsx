@@ -13,7 +13,7 @@ function MainForm() {
   const [designation, setDesignation] = useState("");
   const [techSkills, setTechSkills] = useState("");
   const [description, setDescription] = useState("");
-  const [t,setT] = useState(1);
+  const [t, setT] = useState(1);
   // set initial state for project fields as an array of one empty object
   const [projects, setProjects] = useState([
     { title: "", techStack: "", shortDescription: "" },
@@ -42,14 +42,14 @@ function MainForm() {
 
   // function to add a new project field
   const handleAddProject = () => {
-    console.log("project added",t+1);
+    console.log("project added", t + 1);
     setProjects([
       ...projects,
       { title: "", techStack: "", shortDescription: "" },
     ]);
   };
 
-//when a new project added.. via plus button
+  //when a new project added.. via plus button
   const handleProjectChange = (event, index) => {
     const { name, value } = event.target;
     const updatedProjects = [...projects];
@@ -57,33 +57,32 @@ function MainForm() {
     setProjects(updatedProjects);
   }
 
-  
 
-  const handleSubmit = async(event) =>
-  {
-    console.log("data is:",{
+
+  const handleSubmit = async (event) => {
+    console.log("data is:", {
       name
-      ,designation
-      ,techSkills
-      ,description
-      ,projects
+      , designation
+      , techSkills
+      , description
+      , projects
     })
     event.preventDefault();
-    try{
-      const response = await axios.post("api here",{
-      name: name,
-      designation: designation,
-      techSkills: techSkills,
-      description: description,
-      projects:projects
-    })
-    console.log(response);
-    }catch(error){
+    try {
+      const response = await axios.post("api here", {
+        name: name,
+        designation: designation,
+        techSkills: techSkills,
+        description: description,
+        projects: projects
+      })
+      console.log(response);
+    } catch (error) {
       console.log(error);
     }
-  
+
   }
-  
+
 
   return (
     <div>
@@ -133,49 +132,49 @@ function MainForm() {
 
                 <div style={{ border: "1px" }} key={index}>
                   <div>
-                  <label>Project:</label> <h6 style={{display:"inline",margin:"2rem 0 2rem 0"}}>{index+1}</h6>
+                    <label>Project:</label> <h6 style={{ display: "inline", margin: "2rem 0 2rem 0" }}>{index + 1}</h6>
                   </div>
-                 <form>
-                 <Form.Group className="mb-3" controlId="formBasictext">
-                    {/* asking title of the project */}
-                    <Form.Label>Title:</Form.Label>
-                    <Form.Control name="title" value={project.title} onChange={(event) => handleProjectChange(event, index)} type="text" placeholder="Title" />
-                  </Form.Group>
+                  <form>
+                    <Form.Group className="mb-3" controlId="formBasictext">
+                      {/* asking title of the project */}
+                      <Form.Label>Title:</Form.Label>
+                      <Form.Control name="title" value={project.title} onChange={(event) => handleProjectChange(event, index)} type="text" placeholder="Title" />
+                    </Form.Group>
 
-                  {/* asking duration of the candidate in the company */}
-                  {/* not mandatory */}
-                  <Form.Group className="mb-3" controlId="formBasictext">
-                    <Form.Label> Duration &nbsp;&nbsp;</Form.Label>
-                    <DateRangePicker name="date" />
-                  </Form.Group>
+                    {/* asking duration of the candidate in the company */}
+                    {/* not mandatory */}
+                    <Form.Group className="mb-3" controlId="formBasictext">
+                      <Form.Label> Duration &nbsp;&nbsp;</Form.Label>
+                      <DateRangePicker name="date" />
+                    </Form.Group>
 
-                  {/* asking technical skills of the candiate */}
-                  <Form.Group className="mb-3" controlId="formBasictext">
-                    <Form.Label>TechStack</Form.Label>
-                    <Form.Control name="techStack" value={project.techStack} onChange={(event) => handleProjectChange(event, index)} type="text" placeholder="TechSkills" />
-                  </Form.Group>
-                  {/* short description about the candidate */}
-                  <Form.Group className="mb-3" controlId="formBasictext">
-                    <Form.Label>ShortDescription</Form.Label>
-                    <Form.Control name="shortDescription" value={project.shortDescription} onChange={(event) => handleProjectChange(event, index)} type="text" placeholder="Designation" />
-                  </Form.Group>
-                 </form>
-                
+                    {/* asking technical skills of the candiate */}
+                    <Form.Group className="mb-3" controlId="formBasictext">
+                      <Form.Label>TechStack</Form.Label>
+                      <Form.Control name="techStack" value={project.techStack} onChange={(event) => handleProjectChange(event, index)} type="text" placeholder="TechSkills" />
+                    </Form.Group>
+                    {/* short description about the candidate */}
+                    <Form.Group className="mb-3" controlId="formBasictext">
+                      <Form.Label>ShortDescription</Form.Label>
+                      <Form.Control name="shortDescription" value={project.shortDescription} onChange={(event) => handleProjectChange(event, index)} type="text" placeholder="Designation" />
+                    </Form.Group>
+                  </form>
+
                 </div>
               ))
             }
           </div>
-            <div style={{display:"flex",justifyContent:"space-between"}} >
-              
-              <div style={{display:"inline-block"}}>
+          <div style={{ display: "flex", justifyContent: "space-between" }} >
+
+            <div style={{ display: "inline-block" }}>
               <i onClick={handleAddProject} class="fas fa-plus fa-3x"></i>
-              </div>
-             
-            
+            </div>
 
 
-            <div  style={{display:"inline-block"}} className="submitBtn">
-              <button  type="submit" onClick={handleSubmit}  appearance="primary">Submit</button>
+
+
+            <div style={{ display: "inline-block" }} className="submitBtn">
+              <button type="submit" onClick={handleSubmit} appearance="primary">Submit</button>
             </div>
 
           </div>
