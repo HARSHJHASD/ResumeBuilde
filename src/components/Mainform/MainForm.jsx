@@ -158,6 +158,9 @@ function MainForm() {
                   <div>
                     <label>Project: </label> <h6 style={{ display: "inline", margin: "2rem 0 2rem 0" }}>{index + 1}</h6>
                   </div>
+                  <div style={{ cursor:"pointer"  }}>
+                    <i onClick={() => removeProject(index)} class="fas fa-minus fa-3x"></i>
+                  </div>
                   <form>
                     <Form.Group className="mb-3" controlId="formBasictext">
                       {/* asking title of the project */}
@@ -183,9 +186,7 @@ function MainForm() {
                       <Form.Control required name="shortDescription" value={project.shortDescription} onChange={(event) => handleProjectChange(event, index)} type="text" placeholder="Designation" />
                     </Form.Group>
                   </form>
-                  <div style={{ display: "inline-block" }}>
-                    <i onClick={() => removeProject(index)} class="fas fa-minus fa-3x"></i>
-                  </div>
+                  
 
                 </div>
               ))
@@ -193,13 +194,13 @@ function MainForm() {
           </div>
           <div style={{ display: "flex", justifyContent: "space-between" }} >
 
-            <div style={{ display: "inline-block" }}>
+            <div style={{ display: "inline-block" ,cursor:"pointer"}}>
               <i onClick={handleAddProject} class="fas fa-plus fa-3x"></i>
             </div>
 
 
             <div style={{ display: "inline-block" }} className="submitBtn">
-              <button type="submit" onClick={handleSubmit} appearance="primary">Submit</button>
+              <button type="submit" onClick={handleSubmit}>Submit</button>
             </div>
 
           </div>
