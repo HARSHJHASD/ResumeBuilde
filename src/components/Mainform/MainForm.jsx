@@ -14,6 +14,7 @@ function MainForm() {
   const [techSkills, setTechSkills] = useState("");
   const [description, setDescription] = useState("");
   const [t, setT] = useState(1);
+  const [experience,setExperience] = useState("");
   // set initial state for project fields as an array of one empty object
   const [projects, setProjects] = useState([
     { title: "", techStack: "", shortDescription: "" },
@@ -39,6 +40,11 @@ function MainForm() {
     setDescription(e.target.value);
     console.log(description);
   };
+  const experienceChangeHandler =(e)=>
+  {
+    setExperience(e.target.value);
+    console.log(experience);
+  }
 
   // function to add a new project field
   const handleAddProject = () => {
@@ -71,6 +77,7 @@ function MainForm() {
     try {
       const response = await axios.post("api here", {
         name: name,
+        experience:experience,
         designation: designation,
         techSkills: techSkills,
         description: description,
@@ -82,6 +89,17 @@ function MainForm() {
     }
 
   }
+const removeProject = (index) => {
+  if (projects.length === 1) {
+    console.log("No need to remove any project");
+  } else if (projects.length > 1) {
+    console.log("Remove button pressed of Project: ", index + 1);
+    const updatedProjects = [...projects];
+    updatedProjects.splice(index, 1);
+    setProjects(updatedProjects);
+    console.log(updatedProjects);
+  }
+};
 
 
   return (
@@ -110,6 +128,12 @@ function MainForm() {
           <Form.Group className="mb-3" controlId="formBasictext">
             <Form.Label>TechSkills :</Form.Label>
             <Form.Control onChange={skillsChangeHandler} value={techSkills} type="text" placeholder="TechSkills" />
+          </Form.Group>
+
+          {/* //EXPERINCE OF RHE CANDIATE */}
+          <Form.Group className="mb-3" controlId="formBasictext">
+            <Form.Label>Experience :</Form.Label>
+            <Form.Control onChange={experienceChangeHandler} value={experience} type="text" placeholder="Experience" />
           </Form.Group>
 
 
@@ -159,6 +183,9 @@ function MainForm() {
                       <Form.Control name="shortDescription" value={project.shortDescription} onChange={(event) => handleProjectChange(event, index)} type="text" placeholder="Designation" />
                     </Form.Group>
                   </form>
+                  <div style={{ display: "inline-block" }}>
+                    <i onClick={() => removeProject(index)} class="fas fa-minus fa-3x"></i>
+                  </div>
 
                 </div>
               ))
@@ -169,8 +196,6 @@ function MainForm() {
             <div style={{ display: "inline-block" }}>
               <i onClick={handleAddProject} class="fas fa-plus fa-3x"></i>
             </div>
-
-
 
 
             <div style={{ display: "inline-block" }} className="submitBtn">
