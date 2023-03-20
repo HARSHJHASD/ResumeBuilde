@@ -13,7 +13,7 @@ const App = () => {
       <Navbar/>
       <MainForm/>
       {/* <FromOne/> */}
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   )
 }

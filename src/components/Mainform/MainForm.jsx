@@ -14,7 +14,9 @@ function MainForm() {
   const [techSkills, setTechSkills] = useState("");
   const [description, setDescription] = useState("");
   const [t, setT] = useState(1);
-  const [experience,setExperience] = useState("");
+  const [experience, setExperience] = useState("");
+
+  
   // set initial state for project fields as an array of one empty object
   const [projects, setProjects] = useState([
     { title: "", techStack: "", shortDescription: "" },
@@ -40,8 +42,7 @@ function MainForm() {
     setDescription(e.target.value);
     console.log(description);
   };
-  const experienceChangeHandler =(e)=>
-  {
+  const experienceChangeHandler = (e) => {
     setExperience(e.target.value);
     console.log(experience);
   }
@@ -66,18 +67,17 @@ function MainForm() {
 
 
   const handleSubmit = async (event) => {
-    // console.log("data is:", {
-    //   name
-    //   , designation
-    //   , techSkills
-    //   , description
-    //   , projects
-    // })
     event.preventDefault();
+
+    if (!name || !experience || !designation || !techSkills || !description || !projects) {
+      alert('Please fill in all the fields');
+      return;
+    }
+
     try {
       const response = await axios.post("api here", {
         name: name,
-        experience:experience,
+        experience: experience,
         designation: designation,
         techSkills: techSkills,
         description: description,
@@ -87,19 +87,19 @@ function MainForm() {
     } catch (error) {
       console.log(error);
     }
+  }
 
-  }
-const removeProject = (index) => {
-  if (projects.length === 1) {
-    console.log("No need to remove any project");
-  } else if (projects.length > 1) {
-    console.log("Remove button pressed of Project: ", index + 1);
-    const updatedProjects = [...projects];
-    updatedProjects.splice(index, 1);
-    setProjects(updatedProjects);
-    console.log(updatedProjects);
-  }
-};
+  const removeProject = (index) => {
+    if (projects.length === 1) {
+      console.log("No need to remove any project");
+    } else if (projects.length > 1) {
+      console.log("Remove button pressed of Project: ", index + 1);
+      const updatedProjects = [...projects];
+      updatedProjects.splice(index, 1);
+      setProjects(updatedProjects);
+      console.log(updatedProjects);
+    }
+  };
 
 
   return (
@@ -112,35 +112,35 @@ const removeProject = (index) => {
           {/* asking name of the candidate */}
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Name: </Form.Label>
-            <Form.Control onChange={nameChangeHandler} value={name} type="email" placeholder="Name" />
-            <Form.Text className="text-muted"></Form.Text>
+            <Form.Control onChange={nameChangeHandler} value={name} type="email" placeholder="Name" required />
+            <Form.Text required className="text-muted"></Form.Text>
           </Form.Group>
 
 
           {/* asking designation of the candidate */}
           <Form.Group className="mb-3" controlId="formBasictext">
             <Form.Label>Designation: </Form.Label>
-            <Form.Control onChange={designationChangeHandler} value={designation} type="text" placeholder="Designation" />
+            <Form.Control required onChange={designationChangeHandler} value={designation} type="text" placeholder="Designation" />
           </Form.Group>
 
 
           {/* asking tech skills of the candidate */}
           <Form.Group className="mb-3" controlId="formBasictext">
             <Form.Label>TechSkills :</Form.Label>
-            <Form.Control onChange={skillsChangeHandler} value={techSkills} type="text" placeholder="TechSkills" />
+            <Form.Control required onChange={skillsChangeHandler} value={techSkills} type="text" placeholder="TechSkills" />
           </Form.Group>
 
           {/* //EXPERINCE OF RHE CANDIATE */}
           <Form.Group className="mb-3" controlId="formBasictext">
             <Form.Label>Experience :</Form.Label>
-            <Form.Control onChange={experienceChangeHandler} value={experience} type="text" placeholder="Experience" />
+            <Form.Control required onChange={experienceChangeHandler} value={experience} type="text" placeholder="Experience" />
           </Form.Group>
 
 
           {/* asking professional summary of the candidate */}
           <Form.Group className="mb-3" controlId="formBasictext">
             <Form.Label>Professional Summary : </Form.Label>
-            <Form.Control onChange={descriptionChangeHandler} description={description} type="text" placeholder="Professional Summary" />
+            <Form.Control required onChange={descriptionChangeHandler} description={description} type="text" placeholder="Professional Summary" />
           </Form.Group>
 
 
@@ -162,7 +162,7 @@ const removeProject = (index) => {
                     <Form.Group className="mb-3" controlId="formBasictext">
                       {/* asking title of the project */}
                       <Form.Label>Title: </Form.Label>
-                      <Form.Control name="title" value={project.title} onChange={(event) => handleProjectChange(event, index)} type="text" placeholder="Title" />
+                      <Form.Control required name="title" value={project.title} onChange={(event) => handleProjectChange(event, index)} type="text" placeholder="Title" />
                     </Form.Group>
 
                     {/* asking duration of the candidate in the company */}
@@ -175,12 +175,12 @@ const removeProject = (index) => {
                     {/* asking technical skills of the candiate */}
                     <Form.Group className="mb-3" controlId="formBasictext">
                       <Form.Label>TechStack: </Form.Label>
-                      <Form.Control name="techStack" value={project.techStack} onChange={(event) => handleProjectChange(event, index)} type="text" placeholder="TechSkills" />
+                      <Form.Control required name="techStack" value={project.techStack} onChange={(event) => handleProjectChange(event, index)} type="text" placeholder="TechSkills" />
                     </Form.Group>
                     {/* short description about the candidate */}
                     <Form.Group className="mb-3" controlId="formBasictext">
                       <Form.Label>ShortDescription: </Form.Label>
-                      <Form.Control name="shortDescription" value={project.shortDescription} onChange={(event) => handleProjectChange(event, index)} type="text" placeholder="Designation" />
+                      <Form.Control required name="shortDescription" value={project.shortDescription} onChange={(event) => handleProjectChange(event, index)} type="text" placeholder="Designation" />
                     </Form.Group>
                   </form>
                   <div style={{ display: "inline-block" }}>
